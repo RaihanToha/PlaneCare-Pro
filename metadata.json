@@ -1,0 +1,6 @@
+{
+  "name": "PlantCare Pro",
+  "description": "A highly polished plant care and garden management assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

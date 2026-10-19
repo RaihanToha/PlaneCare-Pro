@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Symmetrical bold organic leaf silhouette centered perfectly in 66dp zone -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,84 C54,84 27,60 27,41 C27,24 39,18 54,18 C69,18 81,24 81,41 C81,60 54,84 54,84 Z" />
+    
+    <!-- Central leaf midrib -->
+    <path
+        android:pathData="M54,80 L54,18"
+        android:strokeWidth="3.2"
+        android:strokeColor="#2E6B4A"
+        android:strokeLineCap="round" />
+        
+    <!-- Symmetrical graceful leaf veins -->
+    <path
+        android:pathData="M54,32 C58,36 67,40 67,46"
+        android:strokeWidth="2.5"
+        android:strokeColor="#2E6B4A"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,44 C58,49 65,54 65,60"
+        android:strokeWidth="2.5"
+        android:strokeColor="#2E6B4A"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,38 C50,42 41,46 41,52"
+        android:strokeWidth="2.5"
+        android:strokeColor="#2E6B4A"
+        android:strokeLineCap="round" />
+    <path
+        android:pathData="M54,50 C50,55 43,60 43,66"
+        android:strokeWidth="2.5"
+        android:strokeColor="#2E6B4A"
+        android:strokeLineCap="round" />
+</vector>
