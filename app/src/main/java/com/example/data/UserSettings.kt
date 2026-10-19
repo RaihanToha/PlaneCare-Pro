@@ -65,11 +65,46 @@ object UserSettings {
         _accountName.value = prefs.getString(KEY_ACCOUNT_NAME, null)
         _profilePhoto.value = prefs.getString(KEY_PROFILE_PHOTO, null)
         
-        // Load firebase credentials
+        // Load firebase credentials securely without hardcoded secrets
         val savedApiKey = prefs.getString(KEY_FIREBASE_API_KEY, "") ?: ""
-        _firebaseApiKey.value = if (savedApiKey.isEmpty()) "AIzaSyB_uoUBFcyPjKIvSmLYy_s2uKvRlNO6Srs" else savedApiKey
+        val buildConfigApiKey = try {
+            val field = com.example.BuildConfig::class.java.getField("FIREBASE_API_KEY")
+            field.get(null) as? String ?: ""
+        } catch (_: Exception) {
+            ""
+        }
+        val resKeyId = context.resources.getIdentifier("google_api_key", "string", context.packageName)
+        val resApiKey = if (resKeyId != 0) {
+            try { context.getString(resKeyId) } catch (_: Exception) { "" }
+        } else {
+            ""
+        }
+        _firebaseApiKey.value = when {
+            savedApiKey.isNotEmpty() -> savedApiKey
+            buildConfigApiKey.isNotEmpty() && buildConfigApiKey != "DEFAULT_FIREBASE_API_KEY" -> buildConfigApiKey
+            resApiKey.isNotEmpty() -> resApiKey
+            else -> ""
+        }
+
         val savedProjId = prefs.getString(KEY_FIREBASE_PROJECT_ID, "") ?: ""
-        _firebaseProjectId.value = if (savedProjId.isEmpty()) "plantcare-pro-2701c" else savedProjId
+        val buildConfigProjId = try {
+            val field = com.example.BuildConfig::class.java.getField("FIREBASE_PROJECT_ID")
+            field.get(null) as? String ?: ""
+        } catch (_: Exception) {
+            ""
+        }
+        val resProjId = context.resources.getIdentifier("project_id", "string", context.packageName)
+        val resProjectId = if (resProjId != 0) {
+            try { context.getString(resProjId) } catch (_: Exception) { "" }
+        } else {
+            ""
+        }
+        _firebaseProjectId.value = when {
+            savedProjId.isNotEmpty() -> savedProjId
+            buildConfigProjId.isNotEmpty() -> buildConfigProjId
+            resProjectId.isNotEmpty() -> resProjectId
+            else -> "plantcare-pro-2701c"
+        }
         _userEmail.value = prefs.getString(KEY_USER_EMAIL, null)
         _userToken.value = prefs.getString(KEY_USER_TOKEN, null)
         _userId.value = prefs.getString(KEY_USER_ID, null)
